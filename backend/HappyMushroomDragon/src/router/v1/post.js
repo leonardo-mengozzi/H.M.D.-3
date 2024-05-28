@@ -13,6 +13,6 @@ router.use((req, res, next) => {
     next()
 })
 
-router.get('/commenti', validate(postValidator.recensione), postController.recensione)
+router.get('/commenti', validate(postValidator.Recensione), postController.readRecensione)
 
 module.exports = router

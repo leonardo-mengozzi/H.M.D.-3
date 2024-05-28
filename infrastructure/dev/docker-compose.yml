@@ -11,7 +11,7 @@ services:
       args:
         SERVICE_PATH: ./gateway
     volumes:
-      - ../../gateway:/usr/src/server
+      - ./gateway:/usr/src/server
     ports:
       - '3000:3000'
     networks:
@@ -22,9 +22,9 @@ services:
       dockerfile: infrastructure/dev/dockerfiles/std.node.Dockerfile
       context: ../..
       args:
-        SERVICE_PATH: ./backend/posts
+        SERVICE_PATH: ./backend/HappyMushroomDragon
     volumes:
-      - ../../backend/posts:/usr/src/server
+      - ./backend/HappyMushroomDragon:/usr/src/server
     networks:
       - backend
       - sql_server
@@ -39,3 +39,5 @@ services:
       - "5533:1433"
     networks:
       - sql_server
+    volumes:
+      - "./data:/var/opt/mssql/data"

@@ -1,6 +1,6 @@
 
 const httpStatus = require("http-status");
-const postRepository = require("..repository/post");
+const postRepository = require("../repository/post");
 
 var confing = {
     user: "sa",
@@ -77,12 +77,12 @@ router.post('/read', (req, res) => {
 });
 */
 
-const readName = (req, res) => {
-    const tablename = req.params.tablename
-    postRepository.AllTable(tablename)
+const readRecensione = (req, res) => {
+    const nomeColonna = req.query.nomeColonna
+    postRepository.RecensioneColonne(nomeColonna)
     .then((Nome) => {
         res.status(httpStatus.OK).json({data: Nome})
     })
 }
 
-module.exports = {readName}; 
+module.exports = {readRecensione}; 

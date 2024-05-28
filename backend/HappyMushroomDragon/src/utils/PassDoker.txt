@@ -1,1 +1,2 @@
-Password docher: 159.zseA
+MSSQL_USER=sa
+MSSQL_SA_PASSWORD=1234hmd!sa
