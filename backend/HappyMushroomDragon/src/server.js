@@ -13,7 +13,7 @@ server.options('*', cors());
 const postRouter = require('./router/v1/post')
 
 // Init posts router on Express
-server.use('/api/v1', postRouter)
+server.use('/api/v1/HMD', postRouter)
 
 const PORT = 3001;
 server.listen(PORT, () => console.log("Service H.M.D. online at port: " + PORT));

@@ -21,25 +21,26 @@
 
             // Your web app's Firebase configuration
             const firebaseConfig = {
-                apiKey: "AIzaSyDk2TKj9q5AahQnN4Od_MQeIkL7XMXvXMY",
-                authDomain: "progetto-classi-v-iti-cesena.firebaseapp.com",
-                projectId: "progetto-classi-v-iti-cesena",
-                storageBucket: "progetto-classi-v-iti-cesena.appspot.com",
-                messagingSenderId: "200987852890",
-                appId: "1:200987852890:web:ec4957871feaabc651d863"
+                apiKey: "AIzaSyBirryy0YcJj2TPF-XyKR9c5AhtWg4w3vA",
+                authDomain: "provaprogetto-ce386.firebaseapp.com",
+                projectId: "provaprogetto-ce386",
+                storageBucket: "provaprogetto-ce386.appspot.com",
+                messagingSenderId: "154501767253",
+                appId: "1:154501767253:web:522ad79c4ffa09bf2574dc"
             };
 
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
 
-            const email = "simone.sanfilippo@diemmea.com"
-            const password = "progetto-classi-v-iti-cesena-admin"
+            const email = "l.m@xxx.com"
+            const password = "123456"
 
             const auth = getAuth();
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in
                     const user = userCredential.user;
+                    console.log(userCredential)
                     // ...
                 })
                 .catch((error) => {

@@ -1,3 +1,8 @@
+const express = require('express')
+const server = express()
+const firebase = require('firebase-admin')
+const fs = require('fs')
+const httpProxy = require('express-http-proxy')
 
 const serviceAccount = require(`${__dirname}/config/firebase_service_account.json`);
 

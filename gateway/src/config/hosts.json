@@ -1,7 +1,7 @@
 [
   {
-    "prefix": "HappyMushroomDragon",
-    "domain": "HMDnetwork",
+    "prefix": "HMD",
+    "domain": "backend",
     "port": 3001
   }
 ]
