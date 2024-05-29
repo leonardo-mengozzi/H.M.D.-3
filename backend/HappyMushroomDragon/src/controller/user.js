@@ -2,22 +2,6 @@
 const httpStatus = require("http-status");
 const postRepository = require("../repository/post");
 
-var confing = {
-    user: "sa",
-    password: "159.zseA",
-    database: "Db_HMD",
-    server: "localhost",
-    port: 1433, 
-    pool: {
-        max: 10,
-        min: 0,
-        idleTimeoutMillis: 30000
-    },
-    options: {
-        encrypt: true, // Per criptare, serve con i DB Azure (anche se non so Azure lo tengo communque)
-        trustServerCertificate: true // Vero perché il nostro server non ha un certificato verificato, per cui gli diciamo noi di fidarsi
-    }
-}
 
 /*
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -77,6 +61,7 @@ router.post('/read', (req, res) => {
 });
 */
 
+// localhost:3001/api/v1/commenti?nomeColonna=contenuto
 const readRecensione = (req, res) => {
     const nomeColonna = req.query.nomeColonna
     postRepository.RecensioneColonne(nomeColonna)
