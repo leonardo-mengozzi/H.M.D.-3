@@ -9,7 +9,6 @@ const sqlConfig = {
     pool: {
         max: 10,
         min: 0,
-        // idleTimeOutMillis: 30000
     },
     options: {
         encrypt: true,

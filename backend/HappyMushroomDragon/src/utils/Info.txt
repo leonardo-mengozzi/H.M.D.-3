@@ -1,0 +1,4 @@
+MSSQL_USER=sa
+MSSQL_SA_PASSWORD=1234hmd!sa
+
+https://www.firebasejwt.com/
