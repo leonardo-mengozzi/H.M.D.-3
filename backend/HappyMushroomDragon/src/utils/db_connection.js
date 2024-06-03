@@ -4,8 +4,12 @@ const sqlConfig = {
     user: "sa",
     password: "1234hmd!sa",
     database: "Db_HMD",
+    /*
     server: "sql_server",
     port: Number(1433),
+    */
+    server: "localhost",
+    port: Number(5533),
     pool: {
         max: 10,
         min: 0,

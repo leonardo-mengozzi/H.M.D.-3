@@ -15,4 +15,9 @@ router.use((req, res, next) => {
 
 router.get('/commenti', validate(postValidator.Recensione), postController.readRecensione)
 
+router.get('/allcommenti', validate(postValidator.AllRecensione), postController.readAllRecensione)
+
+// localhost:3001/api/v1/HMD/addUtente?nome=leo&cognome=mengo&eta=18&paese=italia
+router.post('/addUtente', validate(postValidator.AddUtente), postController.AddUtente)
+
 module.exports = router

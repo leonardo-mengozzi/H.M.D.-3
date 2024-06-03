@@ -70,4 +70,23 @@ const readRecensione = (req, res) => {
     })
 }
 
-module.exports = {readRecensione}; 
+const readAllRecensione = (req, res) => {
+    const numeroRecord = req.query.numeroRecord
+    postRepository.AllRecensione(numeroRecord)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+}
+
+const AddUtente = (req, res) => {
+    const nome = req.query.nome
+    const cognome = req.query.cognome
+    const eta = req.query.eta
+    const paese = req.query.paese
+    postRepository.AddUtente(nome, cognome, eta, paese)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+}
+
+module.exports = {readRecensione, readAllRecensione, AddUtente}; 
