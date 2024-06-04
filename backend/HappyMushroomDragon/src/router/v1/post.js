@@ -17,7 +17,12 @@ router.get('/commenti', validate(postValidator.Recensione), postController.readR
 
 router.get('/allcommenti', validate(postValidator.AllRecensione), postController.readAllRecensione)
 
-// localhost:3001/api/v1/HMD/addUtente?nome=leo&cognome=mengo&eta=18&paese=italia
+// localhost:3001/api/v1/HMD/addUtente?id=1234&nome=leo&cognome=mengo&eta=2005/11/15&paese=italia
 router.post('/addUtente', validate(postValidator.AddUtente), postController.AddUtente)
+
+router.post("/addAccount", validate(postValidator.AddAccount), postController.AddAccount)
+
+// localhost:3001/api/v1/HMD/utente?id=1234
+router.get('/utente', validate(postValidator.Utente), postController.readUtente)
 
 module.exports = router

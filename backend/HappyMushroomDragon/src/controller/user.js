@@ -1,6 +1,7 @@
 
 const httpStatus = require("http-status");
 const postRepository = require("../repository/post");
+const { query } = require("mssql");
 
 
 /*
@@ -79,14 +80,38 @@ const readAllRecensione = (req, res) => {
 }
 
 const AddUtente = (req, res) => {
+    const id = req.query.id
     const nome = req.query.nome
     const cognome = req.query.cognome
     const eta = req.query.eta
     const paese = req.query.paese
-    postRepository.AddUtente(nome, cognome, eta, paese)
+    postRepository.AddUtente(id, nome, cognome, eta, paese)
     .then((Nome) => {
         res.status(httpStatus.OK).json({data: Nome})
     })
 }
 
-module.exports = {readRecensione, readAllRecensione, AddUtente}; 
+const AddAccount = (req, res) => {
+    const id = req.query.id
+    const nickname = req.query.nickname
+    const punteggio = req.query.punteggio
+    const partitegiocate = req.query.partitegiocate
+    const partitevinte = req.query.partitegiocate
+    const soldi = req.query.soldi
+    postRepository.AddAccount(id, nickname, punteggio, partitegiocate, partitevinte, soldi)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+}
+
+const readUtente = (req, res) => {
+    const id = req.query.id
+    postRepository.Utente(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+}
+
+
+
+module.exports = {readRecensione, readAllRecensione, AddUtente, AddAccount, readUtente};
