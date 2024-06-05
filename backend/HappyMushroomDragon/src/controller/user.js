@@ -86,6 +86,23 @@ const personaggi = (req, res) => {
     })
 }
 
+const personaggiPosseduti = (req, res) => {
+    const id = req.query.id
+    postRepository.personaggiPosseduti(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+}
+
+const compra = (req, res) => {
+    const id = req.query.id
+    const nome = req.query.nomepersonaggio
+    postRepository.compra(id, nome)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
 module.exports = {
     readRecensioni, AddRecensione, 
     
@@ -95,5 +112,5 @@ module.exports = {
 
     updatePuntiAccount, updateSoldiAccount,
 
-    personaggi, 
+    personaggi, personaggiPosseduti, compra
 };

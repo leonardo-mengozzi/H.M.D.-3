@@ -65,6 +65,19 @@ const updateSoldiAccount = {
 
 const personaggi = {query: Joi.object().keys({})}
 
+const personaggiPosseduti = {
+    query: Joi.object().keys({
+        id: Joi.string().max(28)
+    })
+}
+
+const compra = {
+    query: Joi.object().keys({
+        id: Joi.string().max(28),
+        nomepersonaggio: Joi.string().max(20)
+    })
+}
+
 module.exports = {
     Recensioni, AddRecensione, 
     
@@ -74,5 +87,5 @@ module.exports = {
 
     updatePuntiAccount, updateSoldiAccount,
 
-    personaggi, 
+    personaggi, personaggiPosseduti, compra
 }

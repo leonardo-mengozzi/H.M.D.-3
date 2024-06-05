@@ -33,8 +33,8 @@ GO
 CREATE TABLE Personaggio (
 	Nome			VARCHAR(20)		PRIMARY KEY NOT NULL,
 	Vita			INT,
-	AnimazioneGame	VARCHAR(100),
-	AnimazioneLogin	VARCHAR(100),
+	AnimazioneGame	VARBINARY(MAX),
+	AnimazioneLogin	VARBINARY(MAX),
 	Costo			INT
 );
 GO
@@ -49,19 +49,19 @@ GO
 CREATE TABLE Nemico (
 	Id				INT		PRIMARY KEY NOT NULL IDENTITY(1,1),
 	Vita			INT,
-	AnimazioneGame	VARCHAR(100)
+	AnimazioneGame	VARBINARY(MAX)
 );
 GO
 
 CREATE TABLE Sfondo (
 	Id			INT				PRIMARY KEY NOT NULL IDENTITY(1,1),
-	Animazione	VARCHAR(100)
+	Animazione	VARBINARY(MAX)
 );
 GO
 
 CREATE TABLE Ostacolo (
 	Id			INT				PRIMARY KEY NOT NULL IDENTITY(1,1),
-	Animazione	VARCHAR(100)
+	Animazione	VARBINARY(MAX)
 );
 GO
 
@@ -123,9 +123,9 @@ INSERT INTO Account
 INSERT INTO Personaggio 
 	(Nome, Vita, AnimazioneGame, AnimazioneLogin, Costo)
 	VALUES 
-	('personaggio1', 100, 'anim_game_1', 'anim_login_1', 50),
-    ('personaggio2', 120, 'anim_game_2', 'anim_login_2', 60),
-    ('personaggio3', 150, 'anim_game_3', 'anim_login_3', 70);
+	('personaggio1', 100, NULL, NULL, 50),
+    ('personaggio2', 120, NULL, NULL, 60),
+    ('personaggio3', 150, NULL, NULL, 70);
 
 INSERT INTO Possiede
 	(IdAccount, NomePersonaggio)
@@ -137,23 +137,23 @@ INSERT INTO Possiede
 INSERT INTO Nemico 
 	(Vita, AnimazioneGame)
 	VALUES 
-	(80, 'anim_game_nemico_1'),
-    (100, 'anim_game_nemico_2'),
-    (120, 'anim_game_nemico_3');
+	(80,  NULL),
+    (100, NULL),
+    (120, NULL);
 
 INSERT INTO Sfondo 
 	(Animazione)
 	VALUES 
-	('anim_sfondo_1'),
-    ('anim_sfondo_2'),
-    ('anim_sfondo_3');
+	(NULL),
+    (NULL),
+    (NULL);
 
 INSERT INTO Ostacolo 
 	(Animazione)
 	VALUES 
-	('anim_ostacolo_1'),
-    ('anim_ostacolo_2'),
-    ('anim_ostacolo_3');
+	(NULL),
+    (NULL),
+    (NULL);
 
 INSERT INTO Recensione 
 	(DataScrittura, IdUtente, Contenuto, Suggerimento, Valutazione)
