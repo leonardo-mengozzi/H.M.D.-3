@@ -103,6 +103,95 @@ const compra = (req, res) => {
     })
 } 
 
+const nemico = (req, res) => {
+    const id = req.query.id
+    postRepository.nemico(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const sfondo = (req, res) => {
+    const id = req.query.id
+    postRepository.sfondo(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const ostacolo = (req, res) => {
+    const id = req.query.id
+    postRepository.ostacolo(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const nemicipartita = (req, res) => {
+    const id = req.query.id
+    postRepository.nemicipartita(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const addnemicipartita = (req, res) => {
+    const idpartia = req.query.idpartita
+    const idnemico = req.query.idnemico
+    const numeronemici = req.query.numeronemici
+    postRepository.addnemicipartita(idpartia, idnemico, numeronemici)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const ostacolipartita = (req, res) => {
+    const id = req.query.id
+    postRepository.ostacolipartita(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const addostacolipartita = (req, res) => {
+    const idpartia = req.query.idpartita
+    const idostacolo = req.query.idostacolo
+    const numeroostacoli = req.query.numeroostacoli
+    postRepository.addostacolipartita(idpartia, idostacolo, numeroostacoli)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const partita = (req, res) => {
+    const id = req.query.id
+    postRepository.partita(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const addpartita = (req, res) => {
+    const datainizio = req.query.datainizio
+    const tempo = req.query.tempo
+    const vittoria = req.query.vittoria
+    const nomepersonaggio = req.query.nomepersonaggio
+    const idsfondo = req.query.idsfondo
+    const idaccount = req.query.idaccount
+    postRepository.addpartita(datainizio, tempo, vittoria, nomepersonaggio, idsfondo, idaccount)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
+const risultatopartita = (req, res) => {
+    const id = req.query.id
+    postRepository.risultatopartita(id)
+    .then((Nome) => {
+        res.status(httpStatus.OK).json({data: Nome})
+    })
+} 
+
 module.exports = {
     readRecensioni, AddRecensione, 
     
@@ -112,5 +201,11 @@ module.exports = {
 
     updatePuntiAccount, updateSoldiAccount,
 
-    personaggi, personaggiPosseduti, compra
+    personaggi, personaggiPosseduti, compra,
+
+    nemico, sfondo, ostacolo,
+
+    nemicipartita, ostacolipartita, addnemicipartita, addostacolipartita, 
+
+    partita, addpartita, risultatopartita
 };

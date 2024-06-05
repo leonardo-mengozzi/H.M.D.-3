@@ -16,7 +16,7 @@ CREATE TABLE Utente (
 	Id		VARCHAR(28)	PRIMARY KEY NOT NULL,
 	Nome	VARCHAR(20),
 	Cognome	VARCHAR(20),
-	Eta		DATETIME2,
+	Eta		DATE,
 	Paese	VARCHAR(10),
 );
 GO
@@ -33,8 +33,8 @@ GO
 CREATE TABLE Personaggio (
 	Nome			VARCHAR(20)		PRIMARY KEY NOT NULL,
 	Vita			INT,
-	AnimazioneGame	VARBINARY(MAX),
-	AnimazioneLogin	VARBINARY(MAX),
+	AnimazioneGame	VARCHAR(500),
+	AnimazioneLogin	VARCHAR(500),
 	Costo			INT
 );
 GO
@@ -49,19 +49,19 @@ GO
 CREATE TABLE Nemico (
 	Id				INT		PRIMARY KEY NOT NULL IDENTITY(1,1),
 	Vita			INT,
-	AnimazioneGame	VARBINARY(MAX)
+	AnimazioneGame	VARCHAR(500)
 );
 GO
 
 CREATE TABLE Sfondo (
 	Id			INT				PRIMARY KEY NOT NULL IDENTITY(1,1),
-	Animazione	VARBINARY(MAX)
+	Animazione	VARCHAR(500)
 );
 GO
 
 CREATE TABLE Ostacolo (
 	Id			INT				PRIMARY KEY NOT NULL IDENTITY(1,1),
-	Animazione	VARBINARY(MAX)
+	Animazione	VARCHAR(500)
 );
 GO
 
@@ -79,7 +79,6 @@ CREATE TABLE Partita (
 	Id				INT			 PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	DataIzio		DATETIME2,
 	Tempo			TIME,
-	Punti			INT,
 	Vittoria		BIT,
 	NomePersonaggio	VARCHAR(20)  REFERENCES Personaggio(Nome) NOT NULL,
 	IdSfondo		INT			 REFERENCES Sfondo(Id) NOT NULL,
@@ -163,11 +162,11 @@ INSERT INTO Recensione
     ('2024-02-15 12:00:00', 'qweproiy12lkjhpv0alkj4kh', 'Recensione 3', 'Suggerimento 3', 3);
 
 INSERT INTO Partita 
-	(DataIzio, Tempo, Punti, Vittoria, NomePersonaggio, IdSfondo, IdAccount)
+	(DataIzio, Tempo, Vittoria, NomePersonaggio, IdSfondo, IdAccount)
 	VALUES 
-	('2024-02-13 15:00:00', '10:30', 500, 1, 'personaggio1', 1, 'asdfera�jfhasjklfhlrivty'),
-    ('2024-02-14 16:00:00', '12:45', 600, 0, 'personaggio2', 2, 'asldjkfqpouiyvcljhlfkjha'),
-    ('2024-02-15 17:00:00', '14:00', 700, 1, 'personaggio3', 3, 'qweproiy12lkjhpv0alkj4kh');
+	('2024-02-13 15:00:00', '10:30', 1, 'personaggio1', 1, 'asdfera�jfhasjklfhlrivty'),
+    ('2024-02-14 16:00:00', '12:45', 0, 'personaggio2', 2, 'asldjkfqpouiyvcljhlfkjha'),
+    ('2024-02-15 17:00:00', '14:00', 1, 'personaggio3', 3, 'qweproiy12lkjhpv0alkj4kh');
 
 INSERT INTO PartitaOstacolo 
 	(IdPartita, IdOstacolo, NumeroOstacoli)

@@ -39,7 +39,6 @@ router.post('/updatePuntiAccount', validate(postValidator.updatePuntiAccount), p
 router.post('/updateSoldiAccount', validate(postValidator.updateSoldiAccount), postController.updateSoldiAccount)
 
 
-
 router.get('/personaggi', validate(postValidator.personaggi), postController.personaggi)
 
 // localhost:3001/api/v1/HMD/personaggiPosseduti?id=asdfera?jfhasjklfhlrivty
@@ -48,14 +47,19 @@ router.get('/personaggiPosseduti', validate(postValidator.personaggiPosseduti), 
 // localhost:3001/api/v1/HMD/compra?id=asdfera?jfhasjklfhlrivty&nomepersonaggio=personaggio3
 router.post('/compra', validate(postValidator.compra), postController.compra)
 
-/**
- * todo: 
- *       get nemico
- *       get sfondo
- *       get ostacolo
- *       get nemico
- *       get/post partita
- *       get/post P-S, P-P, A-P, P-O, P-N
- */
 
+router.get('/nemico', validate(postValidator.nemico), postController.nemico)
+router.get('/sfondo', validate(postValidator.sfondo), postController.sfondo)
+router.get('/ostacolo', validate(postValidator.ostacolo), postController.ostacolo)
+
+
+router.get('/nemicipartita', validate(postValidator.nemicipartita), postController.nemicipartita)
+router.get('/ostacolipartita', validate(postValidator.ostacolipartita), postController.ostacolipartita)
+router.post('/addnemicipartita', validate(postValidator.addnemicipartita), postController.addnemicipartita)
+router.post('/addostacolipartita', validate(postValidator.addostacolipartita), postController.addostacolipartita)
+
+router.get('/partita', validate(postValidator.partita), postController.partita)
+router.post('/addpartita', validate(postValidator.addpartita), postController.addpartita)
+
+router.get('/risultatopartita', validate(postValidator.risultatopartita), postController.risultatopartita)
 module.exports = router

@@ -78,6 +78,75 @@ const compra = {
     })
 }
 
+const nemico = {
+    query: Joi.object().keys({
+        id: Joi.number().integer().min(0)
+    })
+}
+
+const sfondo = {
+    query: Joi.object().keys({
+        id: Joi.number().integer().min(0)
+    })
+}
+
+const ostacolo = {
+    query: Joi.object().keys({
+        id: Joi.number().integer().min(0)
+    })
+}
+
+const nemicipartita = {
+    query: Joi.object().keys({
+        id: Joi.number().integer().min(0)
+    })
+}
+
+const addnemicipartita = {
+    query: Joi.object().keys({
+        idpartita: Joi.number().integer().min(0),
+        idnemico: Joi.number().integer().min(0),
+        numeronemici: Joi.number().integer().min(0)
+    })
+}
+
+const ostacolipartita = {
+    query: Joi.object().keys({
+        id: Joi.number().integer().min(0)
+    })
+}
+
+const addostacolipartita = {
+    query: Joi.object().keys({
+        idpartita: Joi.number().integer().min(0),
+        idostacolo: Joi.number().integer().min(0),
+        numeroostacoli: Joi.number().integer().min(0)
+    })
+}
+
+const partita = {
+    query: Joi.object().keys({
+        id: Joi.number().integer().min(0)
+    })
+}
+
+const addpartita = {
+    query: Joi.object().keys({
+        datainizio: Joi.string(),
+        tempo: Joi.string(),
+        vittoria: Joi.number().integer().min(0).max(1),
+        nomepersonaggio: Joi.string().max(20),
+        idsfondo: Joi.number().integer().min(0),
+        idaccount: Joi.string().max(28)
+    })
+}
+
+const risultatopartita = {
+    query: Joi.object().keys({
+        id: Joi.number().integer().min(0)
+    })
+}
+
 module.exports = {
     Recensioni, AddRecensione, 
     
@@ -87,5 +156,11 @@ module.exports = {
 
     updatePuntiAccount, updateSoldiAccount,
 
-    personaggi, personaggiPosseduti, compra
+    personaggi, personaggiPosseduti, compra,
+
+    nemico, sfondo, ostacolo,
+
+    nemicipartita, ostacolipartita, addnemicipartita, addostacolipartita, 
+
+    partita, addpartita, risultatopartita
 }

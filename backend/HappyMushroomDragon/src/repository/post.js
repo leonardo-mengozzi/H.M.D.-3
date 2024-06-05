@@ -66,6 +66,50 @@ const compra = async (id, nomepersonaggio) => {
     return 0
 }
 
+const nemico = async (id) => {
+    let q = await query(`select * from Nemico where Id = '${id}'`)
+    return q
+}
+const sfondo = async (id) => {
+    let q = await query(`select * from Sfondo where Id = '${id}'`)
+    return q
+}
+const ostacolo = async (id) => {
+    let q = await query(`select * from Ostacolo where Id = '${id}'`)
+    return q
+}
+
+const nemicipartita = async (idpartita) => {
+    let q = await query(`select IdNemico, NumeroNemici from PartitaNemico where IdPartita = '${idpartita}'`)
+    return q
+}
+const ostacolipartita = async (idpartita) => {
+    let q = await query(`select IdOstacolo, NumeroOstacoli as NumeroOstacoli from PartitaOstacolo where IdPartita = '${idpartita}'`)
+    return q
+}
+const addnemicipartita = async (idpartita, idnemico, numeronemici) => {
+    let q = await query(`insert into PartitaNemico values ('${idpartita}', '${idnemico}', '${numeronemici}')`)
+    return q
+}
+const addostacolipartita = async (idpartita, idostacoli, numeroostacoli) => {
+    let q = await query(`insert into PartitaOstacolo values ('${idpartita}', '${idostacoli}', '${numeroostacoli}')`)
+    return q
+}
+
+const partita = async (id) => {
+    let q = await query(`select * from Partita where Id = '${id}'`)
+    return q
+}
+
+const addpartita = async ( datainizio, tempo, vittoria, nomepersonaggio, idsfondo, idaccount) => {
+    let q = await query(`insert into Partita OUTPUT inserted.Id values ('${datainizio}', '${tempo}', '${vittoria}', '${nomepersonaggio}', '${idsfondo}', '${idaccount}')`)
+    return q
+}
+
+const risultatopartita = async (id) => {
+    //todo:
+}
+
 module.exports = {
     Recensioni, AddRecensione, 
     
@@ -75,5 +119,11 @@ module.exports = {
 
     updatePuntiAccount, updateSoldiAccount,
 
-    personaggi, personaggiPosseduti, compra
+    personaggi, personaggiPosseduti, compra,
+
+    nemico, sfondo, ostacolo,
+
+    nemicipartita, ostacolipartita, addnemicipartita, addostacolipartita, 
+
+    partita, addpartita, risultatopartita
 }
