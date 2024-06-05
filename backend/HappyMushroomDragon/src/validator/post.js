@@ -2,16 +2,17 @@ const { json } = require('express')
 const Joi = require('joi')
 const { query } = require('mssql')
 
-const Recensione = {
-    query:Joi.object().keys({
-        nomeColonna: Joi.string()
-    })
-
+const Recensioni = {
+    query: Joi.object().keys({})
 }
 
-const AllRecensione = {
+const AddRecensione = {
     query: Joi.object().keys({
-        numeroRecord: Joi.number().integer().min(0)
+        datascrittura: Joi.string(),
+        idutente: Joi.string().max(28),
+        contenuto: Joi.string().max(500),
+        suggerimento: Joi.string().max(250),
+        valutazione: Joi.number().integer().min(1).max(5)
     })
 }
 
@@ -42,6 +43,36 @@ const Utente = {
     })
 }
 
+const Account = {
+    query: Joi.object().keys({
+        id: Joi.string().max(28)
+    })
+}
+
+const updatePuntiAccount = {
+    query: Joi.object().keys({
+        id: Joi.string().max(28),
+        punti: Joi.number().integer()
+    })
+}
+
+const updateSoldiAccount = {
+    query: Joi.object().keys({
+        id: Joi.string().max(28),
+        soldi: Joi.number().integer()
+    })
+}
+
+const personaggi = {query: Joi.object().keys({})}
+
 module.exports = {
-    Recensione, AllRecensione, AddUtente, AddAccount, Utente
+    Recensioni, AddRecensione, 
+    
+    Account, AddAccount, 
+    
+    Utente, AddUtente,
+
+    updatePuntiAccount, updateSoldiAccount,
+
+    personaggi, 
 }

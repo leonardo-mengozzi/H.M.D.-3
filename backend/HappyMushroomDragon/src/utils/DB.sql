@@ -25,8 +25,6 @@ CREATE TABLE Account (
 	IdUser			VARCHAR(28)		PRIMARY KEY NOT NULL,
 	NickName		VARCHAR(20),
 	Punteggio		INT,
-	PartiteGiocare	INT,
-	PartiteVinte	INT,
 	Soldi			INT,
 	FOREIGN KEY (IdUser) REFERENCES Utente (Id)
 );
@@ -82,6 +80,7 @@ CREATE TABLE Partita (
 	DataIzio		DATETIME2,
 	Tempo			TIME,
 	Punti			INT,
+	Vittoria		BIT,
 	NomePersonaggio	VARCHAR(20)  REFERENCES Personaggio(Nome) NOT NULL,
 	IdSfondo		INT			 REFERENCES Sfondo(Id) NOT NULL,
 	IdAccount		VARCHAR(28)	 REFERENCES Account(IdUser) NOT NULL
@@ -108,18 +107,18 @@ GO
 INSERT INTO Utente
 	(Id, Nome, Cognome, Eta, Paese)
 	VALUES
-	('asdferaòjfhasjklfhlrivty','Mario', 'Rossi', '1990-05-15', 'Italia'),
+	('asdferaï¿½jfhasjklfhlrivty','Mario', 'Rossi', '1990-05-15', 'Italia'),
 	('asldjkfqpouiyvcljhlfkjha','Giulia', 'Bianchi', '1985-08-20', 'Italia'),
 	('qweproiy12lkjhpv0alkj4kh','Luca', 'Verdi', '1992-03-10', 'Italia'),
 	('LASKFJHALKFJHALJKFHASLJK', 'Paolo', 'Neri', '1988-11-25', 'Italia'),
-	('AòLDFòASLKFAòFASKLòFJASD', 'Anna', 'Russo', '1995-02-18', 'Italia');
+	('Aï¿½LDFï¿½ASLKFAï¿½FASKLï¿½FJASD', 'Anna', 'Russo', '1995-02-18', 'Italia');
 
 INSERT INTO Account 
-	(NickName, IdUser, Punteggio, PartiteGiocare, PartiteVinte, Soldi)
+	(NickName, IdUser, Punteggio, Soldi)
 	VALUES 
-	('Baldo', 'asdferaòjfhasjklfhlrivty', 1000, 20, 15, 1500),
-    ('Sole24Ore', 'asldjkfqpouiyvcljhlfkjha', 800, 15, 10, 700),
-    ('tomare', 'qweproiy12lkjhpv0alkj4kh', 1200, 25, 20, 250);
+	('Baldo', 'asdferaï¿½jfhasjklfhlrivty', 1000, 1500),
+    ('Sole24Ore', 'asldjkfqpouiyvcljhlfkjha', 800, 700),
+    ('tomare', 'qweproiy12lkjhpv0alkj4kh', 1200, 250);
 
 INSERT INTO Personaggio 
 	(Nome, Vita, AnimazioneGame, AnimazioneLogin, Costo)
@@ -131,7 +130,7 @@ INSERT INTO Personaggio
 INSERT INTO Possiede
 	(IdAccount, NomePersonaggio)
 	VALUES
-	('asdferaòjfhasjklfhlrivty', 'personaggio1'),
+	('asdferaï¿½jfhasjklfhlrivty', 'personaggio1'),
 	('asldjkfqpouiyvcljhlfkjha', 'personaggio2'),
 	('qweproiy12lkjhpv0alkj4kh', 'personaggio3');
 
@@ -159,16 +158,16 @@ INSERT INTO Ostacolo
 INSERT INTO Recensione 
 	(DataScrittura, IdUtente, Contenuto, Suggerimento, Valutazione)
 	VALUES 
-	('2024-02-13 10:30:00', 'asdferaòjfhasjklfhlrivty', 'Recensione 1', 'Suggerimento 1', 4),
+	('2024-02-13 10:30:00', 'asdferaï¿½jfhasjklfhlrivty', 'Recensione 1', 'Suggerimento 1', 4),
     ('2024-02-14 11:45:00', 'asldjkfqpouiyvcljhlfkjha', 'Recensione 2', 'Suggerimento 2', 5),
     ('2024-02-15 12:00:00', 'qweproiy12lkjhpv0alkj4kh', 'Recensione 3', 'Suggerimento 3', 3);
 
 INSERT INTO Partita 
-	(DataIzio, Tempo, Punti, NomePersonaggio, IdSfondo, IdAccount)
+	(DataIzio, Tempo, Punti, Vittoria, NomePersonaggio, IdSfondo, IdAccount)
 	VALUES 
-	('2024-02-13 15:00:00', '10:30', 500, 'personaggio1', 1, 'asdferaòjfhasjklfhlrivty'),
-    ('2024-02-14 16:00:00', '12:45', 600, 'personaggio2', 2, 'asldjkfqpouiyvcljhlfkjha'),
-    ('2024-02-15 17:00:00', '14:00', 700, 'personaggio3', 3, 'qweproiy12lkjhpv0alkj4kh');
+	('2024-02-13 15:00:00', '10:30', 500, 1, 'personaggio1', 1, 'asdferaï¿½jfhasjklfhlrivty'),
+    ('2024-02-14 16:00:00', '12:45', 600, 0, 'personaggio2', 2, 'asldjkfqpouiyvcljhlfkjha'),
+    ('2024-02-15 17:00:00', '14:00', 700, 1, 'personaggio3', 3, 'qweproiy12lkjhpv0alkj4kh');
 
 INSERT INTO PartitaOstacolo 
 	(IdPartita, IdOstacolo, NumeroOstacoli)

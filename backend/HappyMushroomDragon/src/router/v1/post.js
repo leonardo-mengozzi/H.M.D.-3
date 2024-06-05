@@ -13,16 +13,43 @@ router.use((req, res, next) => {
     next()
 })
 
-router.get('/commenti', validate(postValidator.Recensione), postController.readRecensione)
+// localhost:3001/api/v1/HMD/recensioni
+router.get('/recensioni', validate(postValidator.Recensioni), postController.readRecensioni)
 
-router.get('/allcommenti', validate(postValidator.AllRecensione), postController.readAllRecensione)
+// localhost:3001/api/v1/HMD/addRecensione?datascrittura=2024/01/10&idutente=1234&contenuto=ciao&suggerimento=no suggerimento&valutazione=2
+router.post('/addRecensione', validate(postValidator.AddRecensione), postController.AddRecensione)
+
+// localhost:3001/api/v1/HMD/utente?id=1234
+router.get('/utente', validate(postValidator.Utente), postController.readUtente)
 
 // localhost:3001/api/v1/HMD/addUtente?id=1234&nome=leo&cognome=mengo&eta=2005/11/15&paese=italia
 router.post('/addUtente', validate(postValidator.AddUtente), postController.AddUtente)
 
+// localhost:3001/api/v1/HMD/account?id=asdfera?jfhasjklfhlrivty
+router.get('/account', validate(postValidator.Account), postController.readAccount)
+
+// localhost:3001/api/v1/HMD/addAccount?iduser=1234&nickname=mengo&soldi=100
 router.post("/addAccount", validate(postValidator.AddAccount), postController.AddAccount)
 
-// localhost:3001/api/v1/HMD/utente?id=1234
-router.get('/utente', validate(postValidator.Utente), postController.readUtente)
+
+// localhost:3001/api/v1/HMD/updatePuntiAccount?id=asdfera?jfhasjklfhlrivty&punti=-50
+router.post('/updatePuntiAccount', validate(postValidator.updatePuntiAccount), postController.updatePuntiAccount)
+
+// localhost:3001/api/v1/HMD/updateSoldiAccount?id=asdfera?jfhasjklfhlrivty&soldi=-50
+router.post('/updateSoldiAccount', validate(postValidator.updateSoldiAccount), postController.updateSoldiAccount)
+
+
+router.get('/personaggi', validate(postValidator.personaggi), postController.personaggi)
+
+/**
+ * todo: 
+ *       get/post possiedo
+ *       get nemico
+ *       get sfondo
+ *       get ostacolo
+ *       get nemico
+ *       get/post partita
+ *       get/post P-S, P-P, A-P, P-O, P-N
+ */
 
 module.exports = router
