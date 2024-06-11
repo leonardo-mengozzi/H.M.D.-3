@@ -56,5 +56,5 @@ for (const host of hosts) {
     })
 }
 
-const PORT = 3001;
+const PORT = 3000;
 server.listen(PORT, () => console.log('Gateway online on port: ' + PORT));

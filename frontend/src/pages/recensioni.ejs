@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <p>ciao</p>
+        <button type="button" id="btn-submit">Login with example user</button>
+
+    <script>
+        document.getElementById("btn-submit").addEventListener("click", () => {
+            var l = localStorage.getItem('JWT')
+
+            fetch('/listaRecensioni', {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${l}`, // notice the Bearer before your token
+                }
+            }).then((risultato) => {
+                console.log(risultato)
+
+            })
+
+        })
+    </script>
+
+    </body>
+</html>

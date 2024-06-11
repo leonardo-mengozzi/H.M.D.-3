@@ -1,9 +1,22 @@
 
 networks:
+  databse:
   backend:
-  sql_server:
 
 services:
+  frontend:
+    build:
+      dockerfile: infrastructure/dev/dockerfiles/std.node.Dockerfile
+      context: ../..
+      args:
+        SERVICE_PATH: ./frontend
+    volumes:
+      - ../../frontend:/usr/src/server
+    ports:
+      - '3002:3000'
+    networks:
+      - backend
+
   gateway:
     build:
       dockerfile: infrastructure/dev/dockerfiles/std.node.Dockerfile
@@ -13,7 +26,7 @@ services:
     volumes:
       - ../../gateway:/usr/src/server
     ports:
-      - '3001:3001'
+      - '3001:3000'
     networks:
       - backend
 
@@ -25,9 +38,11 @@ services:
         SERVICE_PATH: ./backend/HappyMushroomDragon
     volumes:
       - ../../backend/HappyMushroomDragon:/usr/src/server
+    ports:
+      - '3000:3000'
     networks:
       - backend
-      - sql_server
+      - databse
 
   sql_server:
     image: mcr.microsoft.com/mssql/server
@@ -38,6 +53,6 @@ services:
     ports:
       - "5533:1433"
     networks:
-      - sql_server
+      - databse
     volumes:
       - "./data:/var/opt/mssql/data"
