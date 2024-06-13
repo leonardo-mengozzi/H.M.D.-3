@@ -31,12 +31,15 @@ router.get('/account', validate(postValidator.Account), postController.readAccou
 // localhost:3001/api/v1/HMD/addAccount?iduser=1234&nickname=mengo&soldi=100
 router.post("/addAccount", validate(postValidator.AddAccount), postController.AddAccount)
 
+// *************************************************************************
+// *     ho cambiato da post a put i due seguenti, non so se va ancora     *
+// *************************************************************************
 
 // localhost:3001/api/v1/HMD/updatePuntiAccount?id=asdfera?jfhasjklfhlrivty&punti=-50
-router.post('/updatePuntiAccount', validate(postValidator.updatePuntiAccount), postController.updatePuntiAccount)
+router.put('/updatePuntiAccount', validate(postValidator.updatePuntiAccount), postController.updatePuntiAccount)
 
 // localhost:3001/api/v1/HMD/updateSoldiAccount?id=asdfera?jfhasjklfhlrivty&soldi=-50
-router.post('/updateSoldiAccount', validate(postValidator.updateSoldiAccount), postController.updateSoldiAccount)
+router.put('/updateSoldiAccount', validate(postValidator.updateSoldiAccount), postController.updateSoldiAccount)
 
 
 router.get('/personaggi', validate(postValidator.personaggi), postController.personaggi)

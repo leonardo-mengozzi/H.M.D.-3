@@ -4,57 +4,64 @@ var ejs = require('ejs');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 
-// dichiariamo il motore di template da utilizzare (ejs)
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/pages');
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
 
-// configurazione bodyparser per estrapolare la stringa dal submit
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+const url = 'http://gateway:3000/api/v1/HMD';
 
-// indicazione per express su dove vengono caricati i file statici (css)
-app.use(express.static(__dirname + '/public')); // css
-
-
-// about page
-app.get('/login', (req, res) => {
-    res.render('login', {res: res});
+app.get('/index', (req, res) => {
+    res.render('index');
 });
 
-app.get('/recensioni', (req, res) => {
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.get('/singin', (req, res) => {
+    res.render('singing');
+});
+
+app.get('/info', (req, res) => {
+    res.render('info');
+});
+
+app.get('/user', (req, res) => {
     res.render('recensioni');
 })
 
-// http://localhost:3002/recensioni
-app.get('/listaRecensioni', (req, res) => {
-    var token = req.headers["authorization"]
-
-    var api = 'http://gateway:3000/api/v1/HMD/recensioni'
-    axios.get(api, { 
-        headers: {"Authorization" : token} 
-    }).then(response => {
-        //res.send({response: response});
-        res.status(200).json({response: response})
-    }).catch((ex) => {
-        res.send({response : ex});
-    });
-
+app.get('/game', (req, res) => {
+    res.render('game');
 });
 
-/*
-const AddRecensione = (req, res) => {
-    const datascrittura = req.query.datascrittura
-    const idutente = req.query.idutente
-    const contenuto = req.query.contenuto
-    const suggerimento = req.query.suggerimento
-    const valutazione = req.query.valutazione
-    postRepository.AddRecensione(datascrittura, idutente, contenuto, suggerimento, valutazione)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+// http://localhost:3002/recensioni
+app.get('/recensioni', (req, res) => {
+    axios.get(url + '/recensioni', 
+        {headers: {"Authorization" : req.headers["authorization"]}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
+
+app.post('/addRecensione', (req, res) => {
+    const params = new URLSearchParams({
+        datascrittura: '2005/11/15',
+        idutente: 'qweproiy12lkjhpv0alkj4kh',
+        contenuto: 'la ciola',
+        suggerimento: 'il topo cazzo',
+        valutazione: 4
+    });
+
+    axios.post(url + '/addRecensione?' + params.toString(), {},
+        {headers: {"Authorization" : req.headers["authorization"]}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+// todo: come interpretare token per avere id nel frontend e come fare i put (speriamo siano simili hai post ;( )
+
+/*
 const AddUtente = (req, res) => {
     const id = req.query.id
     const nome = req.query.nome

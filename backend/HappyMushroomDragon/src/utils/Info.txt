@@ -2,3 +2,8 @@ MSSQL_USER=sa
 MSSQL_SA_PASSWORD=1234hmd!sa
 
 https://www.firebasejwt.com/
+
+https://reqbin.com/code/javascript/wc3qbk0b/javascript-fetch-json-example#:~:text=To%20fetch%20JSON%20from%20the,resolves%20with%20a%20JSON%20object
+
+https://rapidapi.com/guides/query-parameters-fetch
+

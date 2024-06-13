@@ -1,7 +1,6 @@
 
 const httpStatus = require("http-status");
 const postRepository = require("../repository/post");
-const { query } = require("mssql");
 
 const readRecensioni = (req, res) => {
     postRepository.Recensioni()
@@ -16,6 +15,7 @@ const AddRecensione = (req, res) => {
     const contenuto = req.query.contenuto
     const suggerimento = req.query.suggerimento
     const valutazione = req.query.valutazione
+
     postRepository.AddRecensione(datascrittura, idutente, contenuto, suggerimento, valutazione)
     .then((Nome) => {
         res.status(httpStatus.OK).json({data: Nome})

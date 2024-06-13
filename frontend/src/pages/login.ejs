@@ -7,7 +7,6 @@
     </head>
     <body>
     <button type="button" id="btn-submit">Login with example user</button>
-
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js'
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
@@ -31,14 +30,13 @@
 
             const auth = getAuth();
             signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    localStorage.setItem('JWT', userCredential.user.accessToken)
-                    console.log(localStorage.getItem('JWT'))
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                });
+            .then((userCredential) => {
+                localStorage.setItem('JWT', userCredential.user.accessToken)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
         })
     </script>
     </body>

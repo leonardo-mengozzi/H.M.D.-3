@@ -6,26 +6,41 @@
         <title>Document</title>
     </head>
     <body>
-        <p>ciao</p>
-        <button type="button" id="btn-submit">Login with example user</button>
+        <button type="button" id="btn-read">leggi</button>
+        <script>
+            document.getElementById("btn-read").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
 
-    <script>
-        document.getElementById("btn-submit").addEventListener("click", () => {
-            var l = localStorage.getItem('JWT')
-
-            fetch('/listaRecensioni', {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': `Bearer ${l}`, // notice the Bearer before your token
-                }
-            }).then((risultato) => {
-                console.log(risultato)
-
+                fetch('/recensioni', {
+                    method: 'GET',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`, // notice the Bearer before your token
+                    }
+                })
+                .then(response => response.json())
+                .then(risultato => console.log(JSON.stringify(risultato)))
+                .catch(ex => console.log('ERRORE: ' + ex))
             })
+        </script>
 
-        })
-    </script>
+        <button type="button" id="btn-write">scrivi</button>
+        <script>
+            document.getElementById("btn-write").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+                
+                fetch(`/addRecensione?datascrittura=${'2005/11/15'}&idutente=${124578}&contenuto=${'la ciola'}&suggerimento=${'il topo cazzo'}&valutazione=${4}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(response => console.log(response))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
 
     </body>
 </html>
