@@ -3,6 +3,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 
 const validate = (schema) => (req, res, next) => {
+
     const validSchema = pick(schema, ['params', 'query', 'body']);
 
     let chiavi = Object.keys(validSchema)

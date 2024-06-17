@@ -28,8 +28,9 @@
         <script>
             document.getElementById("btn-write").addEventListener("click", () => {
                 var l = localStorage.getItem('JWT')
-                
-                fetch(`/addRecensione?datascrittura=${'2005/11/15'}&idutente=${124578}&contenuto=${'la ciola'}&suggerimento=${'il topo cazzo'}&valutazione=${4}`, {
+                var id = localStorage.getItem('ID')
+
+                fetch(`/addRecensione?datascrittura=${'2005/11/18'}&idutente=${id}&contenuto=${'la ciola'}&suggerimento=${'il topo cazzo'}&valutazione=${4}`, {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json',
@@ -42,5 +43,352 @@
             })
         </script>
 
+        <button type="button" id="btn-addUser">Aggiungi utente</button>
+        <script>
+            document.getElementById("btn-addUser").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+                var id = localStorage.getItem('ID')
+
+                fetch(`/addUtente?id=${id}&nome=leo&cognome=Mengo&eta=2005/11/15&paese=italia`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(response => console.log(response))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-addAccount">Aggiungi account</button>
+        <script>
+            document.getElementById("btn-addAccount").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+                var id = localStorage.getItem('ID')
+
+                fetch(`/addAccount?id=${id}&nickname=leo&punteggio=45&soldi=99`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(response => console.log(response))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-getUser">leggi utente</button>
+        <script>
+            document.getElementById("btn-getUser").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+
+                fetch(`/utente?id=UA03Nj72wESYOaL7wAGyozNttQf1`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(risultato => console.log(JSON.stringify(risultato)))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-getAccount">leggi account</button>
+        <script>
+            document.getElementById("btn-getAccount").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+
+                fetch(`/account?id=UA03Nj72wESYOaL7wAGyozNttQf1`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(risultato => console.log(JSON.stringify(risultato)))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-getPersonaggi">leggi personaggi</button>
+        <script>
+            document.getElementById("btn-getPersonaggi").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+
+                fetch(`/personaggi`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(risultato => console.log(JSON.stringify(risultato)))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-updatepunt">aggiorna punti</button>
+        <script>
+            document.getElementById("btn-updatepunt").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+
+                fetch(`/updatePuntiAccount?id=UA03Nj72wESYOaL7wAGyozNttQf1&punti=100`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(risultato => console.log(JSON.stringify(risultato)))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-updatemoney">aggiorna soldi</button>
+        <script>
+            document.getElementById("btn-updatemoney").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+
+                fetch(`/updateSoldiAccount?id=UA03Nj72wESYOaL7wAGyozNttQf1&soldi=100`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(risultato => console.log(JSON.stringify(risultato)))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-getPersonaggiPosseduti">leggi personaggi posseduti</button>
+        <script>
+            document.getElementById("btn-getPersonaggiPosseduti").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+
+                fetch(`/personaggiPosseduti?id=asdfera?jfhasjklfhlrivty`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(risultato => console.log(JSON.stringify(risultato)))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+        <button type="button" id="btn-compra">compra</button>
+        <script>
+            document.getElementById("btn-compra").addEventListener("click", () => {
+                var l = localStorage.getItem('JWT')
+                var id = localStorage.getItem('ID')
+
+                fetch(`/compra?id=${id}&nomepersonaggio=personaggio1`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${l}`
+                    }
+                })
+                .then(response => response.json())
+                .then(response => console.log(response))
+                .catch(ex => console.log('ERRORE: ' + ex))
+            })
+        </script>
+
+
+
+<button type="button" id="btn-nemico">leggi nemico</button>
+<script>
+    document.getElementById("btn-nemico").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/nemico?id=1`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(risultato => console.log(JSON.stringify(risultato)))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+<button type="button" id="btn-sfondo">sfondo</button>
+<script>
+    document.getElementById("btn-sfondo").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/sfondo?id=1`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(risultato => console.log(JSON.stringify(risultato)))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+<button type="button" id="btn-ostacolo">ostacolo</button>
+<script>
+    document.getElementById("btn-ostacolo").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/ostacolo?id=1`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(risultato => console.log(JSON.stringify(risultato)))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+
+
+
+
+<button type="button" id="btn-nemicipartita">nemicipartita</button>
+<script>
+    document.getElementById("btn-nemicipartita").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/nemicipartita?id=1`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(risultato => console.log(JSON.stringify(risultato)))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+<button type="button" id="btn-ostacolipartita">ostacolipartita</button>
+<script>
+    document.getElementById("btn-ostacolipartita").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/ostacolipartita?id=1`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(risultato => console.log(JSON.stringify(risultato)))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+
+<button type="button" id="btn-addnemicipartita">addnemicipartita</button>
+<script>
+    document.getElementById("btn-addnemicipartita").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/addnemicipartita?idpartita=1&idnemico=2&numeronemici=45`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+<button type="button" id="btn-addostacolipartita">addostacolipartita</button>
+<script>
+    document.getElementById("btn-addostacolipartita").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/addostacolipartita?idpartia=1&idostacolo=1&numeroostacoli=45`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+
+
+
+<button type="button" id="btn-partita">partita</button>
+<script>
+    document.getElementById("btn-partita").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/partita?id=1`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(risultato => console.log(JSON.stringify(risultato)))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+
+<button type="button" id="btn-addpartita">addpartita</button>
+<script>
+    document.getElementById("btn-addpartita").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch(`/addpartita?datainizio=2005/11/15&tempo=00:00:50&vittoria=false&nomepersonaggio=personaggio1&idsfondo=1&idaccount=asdfera?jfhasjklfhlrivty`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`
+            }
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
+
+<button type="button" id="btn-risultatopartita">risultatopartita</button>
+<script>
+    document.getElementById("btn-risultatopartita").addEventListener("click", () => {
+        var l = localStorage.getItem('JWT')
+
+        fetch('/risultatopartita?id=1', {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${l}`, // notice the Bearer before your token
+            }
+        })
+        .then(response => response.json())
+        .then(risultato => console.log(JSON.stringify(risultato)))
+        .catch(ex => console.log('ERRORE: ' + ex))
+    })
+</script>
     </body>
 </html>

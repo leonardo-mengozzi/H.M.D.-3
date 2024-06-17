@@ -43,195 +43,290 @@ app.get('/recensioni', (req, res) => {
     .catch(ex => res.json({response : ex}));
 });
 
-
 app.post('/addRecensione', (req, res) => {
+    var token = req.headers["authorization"];
+
     const params = new URLSearchParams({
-        datascrittura: '2005/11/15',
-        idutente: 'qweproiy12lkjhpv0alkj4kh',
-        contenuto: 'la ciola',
-        suggerimento: 'il topo cazzo',
-        valutazione: 4
+        datascrittura: req.query.datascrittura,
+        idutente: req.query.idutente,
+        contenuto: req.query.contenuto,
+        suggerimento: req.query.suggerimento,
+        valutazione: req.query.valutazione
     });
 
     axios.post(url + '/addRecensione?' + params.toString(), {},
-        {headers: {"Authorization" : req.headers["authorization"]}})
+        {headers: {"Authorization" : token}})
     .then(response => res.json(response.data))
     .catch(ex => res.json({response : ex}));
 });
 
-// todo: come interpretare token per avere id nel frontend e come fare i put (speriamo siano simili hai post ;( )
+// todo: come fare i put (speriamo siano simili hai post ;( )
 
-/*
-const AddUtente = (req, res) => {
-    const id = req.query.id
-    const nome = req.query.nome
-    const cognome = req.query.cognome
-    const eta = req.query.eta
-    const paese = req.query.paese
-    postRepository.AddUtente(id, nome, cognome, eta, paese)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+app.post('/addUtente', (req, res) => {
+    var token = req.headers["authorization"];
 
-const AddAccount = (req, res) => {
-    const id = req.query.id
-    const nickname = req.query.nickname
-    const punteggio = req.query.punteggio
-    const soldi = req.query.soldi
-    postRepository.AddAccount(id, nickname, punteggio, soldi)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+    const params = new URLSearchParams({
+        id: req.query.id,
+        nome: req.query.nome,
+        cognome: req.query.cognome,
+        eta: req.query.eta,
+        paese: req.query.paese
+    });
 
-const readUtente = (req, res) => {
-    const id = req.query.id
-    postRepository.Utente(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+    axios.post(url + '/addUtente?' + params.toString(), {},
+        {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
-const readAccount = (req, res) => {
-    const id = req.query.id
-    postRepository.Account(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+app.post('/addAccount', (req, res) => {
+    var token = req.headers["authorization"];
 
-const updatePuntiAccount = (req, res) => {
-    const id = req.query.id
-    const punti = req.query.punti
-    postRepository.updatePuntiAccount(id, punti)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+    const params = new URLSearchParams({
+        id: req.query.id,
+        nickname:  req.query.nickname,
+        punteggio: req.query.punteggio,
+        soldi: req.query.soldi
+    });
 
-const updateSoldiAccount = (req, res) => {
-    const id = req.query.id
-    const soldi = req.query.soldi
-    postRepository.updateSoldiAccount(id, soldi)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+    axios.post(url + '/addAccount?' + params.toString(), {},
+        {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
-const personaggi = (req, res) => {
-    postRepository.personaggi()
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+app.get('/utente', (req, res) => {
+    var token = req.headers["authorization"];
 
-const personaggiPosseduti = (req, res) => {
-    const id = req.query.id
-    postRepository.personaggiPosseduti(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-}
+    const params = new URLSearchParams({
+        id: req.query.id
+    });
 
-const compra = (req, res) => {
-    const id = req.query.id
-    const nome = req.query.nomepersonaggio
-    postRepository.compra(id, nome)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+    axios.get(url + '/utente?' + params.toString(),
+        {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
-const nemico = (req, res) => {
-    const id = req.query.id
-    postRepository.nemico(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+app.get('/account', (req, res) => {
+    var token = req.headers["authorization"];
 
-const sfondo = (req, res) => {
-    const id = req.query.id
-    postRepository.sfondo(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+    const params = new URLSearchParams({
+         id: req.query.id
+    });
 
-const ostacolo = (req, res) => {
-    const id = req.query.id
-    postRepository.ostacolo(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+    axios.get(url + '/account?' + params.toString(),
+        {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
-const nemicipartita = (req, res) => {
-    const id = req.query.id
-    postRepository.nemicipartita(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+app.put('/updatePuntiAccount', (req, res) => {
+    var token = req.headers["authorization"];
 
-const addnemicipartita = (req, res) => {
-    const idpartia = req.query.idpartita
-    const idnemico = req.query.idnemico
-    const numeronemici = req.query.numeronemici
-    postRepository.addnemicipartita(idpartia, idnemico, numeronemici)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+    const params = new URLSearchParams({
+         id: req.query.id,
+         punti: req.query.punti
+    });
 
-const ostacolipartita = (req, res) => {
-    const id = req.query.id
-    postRepository.ostacolipartita(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+    axios.put(url + '/updatePuntiAccount?' + params.toString(), {},
+        {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
-const addostacolipartita = (req, res) => {
-    const idpartia = req.query.idpartita
-    const idostacolo = req.query.idostacolo
-    const numeroostacoli = req.query.numeroostacoli
-    postRepository.addostacolipartita(idpartia, idostacolo, numeroostacoli)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+app.put('/updateSoldiAccount', (req, res) => {
+    var token = req.headers["authorization"];
 
-const partita = (req, res) => {
-    const id = req.query.id
-    postRepository.partita(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+    const params = new URLSearchParams({
+         id : req.query.id,
+         soldi: req.query.soldi
+    });
+    
+    axios.put(url + '/updateSoldiAccount?' + params.toString(), {},
+        {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
-const addpartita = (req, res) => {
-    const datainizio = req.query.datainizio
-    const tempo = req.query.tempo
-    const vittoria = req.query.vittoria
-    const nomepersonaggio = req.query.nomepersonaggio
-    const idsfondo = req.query.idsfondo
-    const idaccount = req.query.idaccount
-    postRepository.addpartita(datainizio, tempo, vittoria, nomepersonaggio, idsfondo, idaccount)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
+app.get('/personaggi', (req, res) => {
+    var token = req.headers["authorization"];
 
-const risultatopartita = (req, res) => {
-    const id = req.query.id
-    postRepository.risultatopartita(id)
-    .then((Nome) => {
-        res.status(httpStatus.OK).json({data: Nome})
-    })
-} 
-*/
+    axios.get(url + '/personaggi',
+    {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+app.get('/personaggiPosseduti', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id : req.query.id
+   });
+
+   axios.get(url + '/personaggiPosseduti?' + params.toString(),
+   {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+app.post('/compra', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id : req.query.id,
+        nomepersonaggio: req.query.nomepersonaggio
+    });
+
+    axios.post(url + '/compra?' + params.toString(), {},
+        {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+app.get('/nemico', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id : req.query.id
+    });
+
+    axios.get(url + '/nemico?' + params.toString(),
+    {headers: {"Authorization" : token}})
+     .then(response => res.json(response.data))
+     .catch(ex => res.json({response : ex}));
+});
+
+app.get('/sfondo', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id : req.query.id
+    });
+
+    axios.get(url + '/sfondo?' + params.toString(),
+    {headers: {"Authorization" : token}})
+     .then(response => res.json(response.data))
+     .catch(ex => res.json({response : ex}));
+});
+
+app.get('/ostacolo', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id : req.query.id
+    });
+
+    axios.get(url + '/ostacolo?' + params.toString(),
+    {headers: {"Authorization" : token}})
+     .then(response => res.json(response.data))
+     .catch(ex => res.json({response : ex}));
+});
+
+app.get('/nemicipartita', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id : req.query.id
+    });
+
+    axios.get(url + '/nemicipartita?' + params.toString(),
+    {headers: {"Authorization" : token}})
+     .then(response => res.json(response.data))
+     .catch(ex => res.json({response : ex}));
+});
+
+// todo: NON VA ERRORE 400
+app.post('/addnemicipartita', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        idpartita: req.query.idpartia,
+        idnemico: req.query.idnemico,
+        numeronemici: req.query.numeronemici
+    });
+
+    axios.post(url + '/addnemicipartita?' + params.toString(), {},
+    {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+app.get('/ostacolipartita', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id : req.query.id
+    });
+
+    axios.get(url + '/ostacolipartita?' + params.toString(),
+    {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+// todo: NON VA ERRORE 400
+app.post('/addostacolipartita', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        idpartia: req.query.idpartita,
+        idostacolo: req.query.idostacolo,
+        numeroostacoli: req.query.numeroostacoli
+    });
+
+    axios.post(url + '/addostacolipartita?' + params.toString(), {},
+    {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+
+app.get('/partita', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id: req.query.id
+    });
+
+    axios.get(url + '/partita?' + params.toString(),
+    {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+// todo: non va errore 400
+app.post('/addpartita', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        datainizio: req.query.datainizio,
+        tempo: req.query.tempo,
+        vittoria: req.query.vittoria,
+        nomepersonaggio: req.query.nomepersonaggio,
+        idsfondo: req.query.idsfondo,
+        idaccount: req.query.idaccount
+    });
+
+    axios.post(url + '/addpartita?' + params.toString(), {},
+    {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
+
+app.get('/risultatopartita', (req, res) => {
+    var token = req.headers["authorization"];
+
+    const params = new URLSearchParams({
+        id: req.query.id
+    });
+
+    axios.get(url + '/risultatopartita?' + params.toString(),
+    {headers: {"Authorization" : token}})
+    .then(response => res.json(response.data))
+    .catch(ex => res.json({response : ex}));
+});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log("Service H.M.D. online at port: " + PORT));
